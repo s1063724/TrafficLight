@@ -1,7 +1,10 @@
 package tw.edu.pu.csie.s1063724.trafficlight;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
 import android.os.Bundle;
@@ -36,40 +39,48 @@ public class GameActivity extends AppCompatActivity {
         //設定初始測試之燈號秒數
         GameSV.SetLightSec(10,5,10);
         handler= new Handler();
-        Runnable runnable = new Runnable() {
+        Runnable count_down = new Runnable() {
             @Override
             public void run() {
                 if(GameSV.GreenLightSec > 0){
                     GameSV.GreenLightSec--;
                 }else if(GameSV.YellowLightSec>0){
                     GameSV.YellowLightSec--;
-                }else {
+                }else if (GameSV.RedLightSec > 0) {
                     GameSV.RedLightSec--;
+                }else {     //紅綠燈reset
+                    GameSV.SetLightSec(10, 5, 10);
                 }
+                handler.postDelayed(this, 1000);
             }
         };
+        handler.post(rendering);
+        handler.postDelayed(count_down, 1000);
     }
+
     //利用手指觸控，控制小男孩走路
     public boolean onTouchEvent (MotionEvent event){
         if (event.getAction() == MotionEvent.ACTION_DOWN){
             GameSV.BoyMoving = true;
-            handler.post(runnable);
+
         }
         else if (event.getAction() == MotionEvent.ACTION_UP){
             GameSV.BoyMoving =  false;
-            handler.removeCallbacks(runnable);  //銷毀執行緒
+//            handler.removeCallbacks(runnable);  //銷毀執行緒
         }
         return true;
     }
 
     //處理小男孩走路
-    Runnable runnable = new Runnable() {
+    Runnable rendering = new Runnable() {
         @Override
         public void run() {
             Canvas canvas = GameSV.getHolder().lockCanvas();
-            GameSV.drawSomething(canvas);
-            GameSV.getHolder().unlockCanvasAndPost(canvas);
-            handler.postDelayed(runnable, 50);
+            if(canvas != null){
+                GameSV.drawSomething(canvas);
+                GameSV.getHolder().unlockCanvasAndPost(canvas);
+            }
+            handler.postDelayed(this, 50);
         }
     };
 }

@@ -71,12 +71,19 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         paint.setColor(Color.RED);
         canvas.drawCircle(canvas.getWidth() - r -8, r, r, paint);
 
-
         //以綠燈為例，畫出實心圓
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.GREEN);
-        canvas.drawCircle(canvas.getWidth() - r -8, 5*r+20, r, paint);
+        canvas.drawCircle(canvas.getWidth() - r - 8, 5 * r + 20, r, paint);
 
+        //黃燈
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setColor(Color.YELLOW);
+        canvas.drawCircle(canvas.getWidth() - r -8, 3*r+10, r, paint);
+        //紅燈
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setColor(Color.RED);
+        canvas.drawCircle(canvas.getWidth() - r -8, r, r, paint);
         //顯示各燈號秒數
         paint.setColor(Color.BLUE);
         paint.setTextSize(r);

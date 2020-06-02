@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -43,10 +44,13 @@ public class GameActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if(GameSV.GreenLightSec > 0){
+
                     GameSV.GreenLightSec--;
                 }else if(GameSV.YellowLightSec>0){
+
                     GameSV.YellowLightSec--;
                 }else if (GameSV.RedLightSec > 0) {
+
                     GameSV.RedLightSec--;
                 }else {     //紅綠燈reset
                     GameSV.SetLightSec(10, 5, 10);

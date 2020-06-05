@@ -1,10 +1,14 @@
 package tw.edu.pu.csie.s1063724.trafficlight;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -19,10 +23,23 @@ public class MainActivity extends AppCompatActivity {
                 | View.SYSTEM_UI_FLAG_FULLSCREEN
                 | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 
+
         //設定螢幕為橫式
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         setContentView(R.layout.activity_main);
+
+        EditText myEditText = (EditText) findViewById(R.id.green);
+        EditText myEditText1 = (EditText) findViewById(R.id.yello);
+        EditText myEditText2 = (EditText) findViewById(R.id.red);
+        if ("".equals(myEditText.getText().toString().trim())){
+            Toast.makeText(this, "是否有一個以上為空白", Toast.LENGTH_LONG).show();
+            return;
+        }
+//        if (myEditText.toString().startsWith("0")) {
+//            Toast.makeText(this,"should not starts with zero(0)",
+//                    Toast.LENGTH_SHORT).show();
+//        }
     }
 
     public void StartGame(View v){

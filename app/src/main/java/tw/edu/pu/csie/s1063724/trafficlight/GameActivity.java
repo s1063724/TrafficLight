@@ -1,17 +1,14 @@
 package tw.edu.pu.csie.s1063724.trafficlight;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+
+import static tw.edu.pu.csie.s1063724.trafficlight.GameSurfaceView.canvas;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -46,11 +43,10 @@ public class GameActivity extends AppCompatActivity {
                 if(GameSV.GreenLightSec > 0){
 
                     GameSV.GreenLightSec--;
-                }else if(GameSV.YellowLightSec>0){
 
+                }else if(GameSV.YellowLightSec>0){
                     GameSV.YellowLightSec--;
                 }else if (GameSV.RedLightSec > 0) {
-
                     GameSV.RedLightSec--;
                 }else {     //紅綠燈reset
                     GameSV.SetLightSec(10, 5, 10);

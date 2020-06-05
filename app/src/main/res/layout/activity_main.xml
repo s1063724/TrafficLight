@@ -19,6 +19,7 @@
         android:text="紅綠燈(作者：靜宜大學資工系吳彬瑞)"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/gl1" />
 
@@ -51,6 +52,46 @@
         app:layout_constraintBottom_toTopOf="@+id/gl2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnStart" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="185dp"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="0dp"
+        app:layout_constraintGuide_percent="0.45"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/green"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:hint="請输入綠燈秒數"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gl3" />
+
+    <EditText
+        android:id="@+id/yello"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="252dp"
+        android:layout_weight="1"
+        android:hint="請输入黃燈秒數"
+        app:layout_constraintEnd_toEndOf="@+id/red"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gl3" />
+
+    <EditText
+        android:id="@+id/red"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:layout_weight="1"
+        android:hint="請输入紅燈秒數"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/gl3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

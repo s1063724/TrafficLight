@@ -13,6 +13,7 @@ import android.view.SurfaceView;
 
 public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callback {
 
+    public static Canvas canvas;
     SurfaceHolder surfaceHolder;
     Bitmap Road, Boy;
 
@@ -20,7 +21,7 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
     Boolean BoyMoving = false; //小男孩是否移動
     int BGmoveX = 0; //背景圖片往左捲動像素
 
-    Paint paint; //畫筆
+    static Paint paint; //畫筆
     Rect SrcRect, DestRect; //繪圖所需長方形
     float ratio, w, h; //比例及寬度與長度
 
@@ -51,11 +52,13 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         DrawLight(canvas);  //紅綠燈繪製
     }
 
+    int r;
     //紅綠燈繪製
     public void DrawLight(Canvas canvas) {
+
         //長方形區域黑色背景
         paint.setColor(Color.BLACK);
-        int r = (int) 100 * canvas.getHeight() / 1080;
+        r = (int) 100 * canvas.getHeight() / 1080;
         canvas.drawRect(canvas.getWidth()-2*r-16, 0,
                 canvas.getWidth(), 6*r+30, paint);
 
@@ -71,6 +74,7 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         paint.setColor(Color.RED);
         canvas.drawCircle(canvas.getWidth() - r -8, r, r, paint);
 
+
         //以綠燈為例，畫出實心圓
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.GREEN);
@@ -79,17 +83,34 @@ public class GameSurfaceView extends SurfaceView implements SurfaceHolder.Callba
         //黃燈
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.YELLOW);
-        canvas.drawCircle(canvas.getWidth() - r -8, 3*r+10, r, paint);
+        canvas.drawCircle(canvas.getWidth() - r - 8, 3 * r + 10, r, paint);
+
         //紅燈
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
         paint.setColor(Color.RED);
-        canvas.drawCircle(canvas.getWidth() - r -8, r, r, paint);
+        canvas.drawCircle(canvas.getWidth() - r - 8, r, r, paint);
+
         //顯示各燈號秒數
         paint.setColor(Color.BLUE);
         paint.setTextSize(r);
         canvas.drawText(String.valueOf(GreenLightSec), canvas.getWidth() - 1.5f *r, 5.5f * r + 10 , paint);
+        if(GreenLightSec == 0){
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            paint.setColor(Color.BLACK);
+            canvas.drawCircle(canvas.getWidth() - r - 8, 5 * r + 20, r, paint);
+        }
         canvas.drawText(String.valueOf(YellowLightSec), canvas.getWidth() - 1.5f *r, 3.5f * r + 5 , paint);
+        if(YellowLightSec == 0){
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            paint.setColor(Color.BLACK);
+            canvas.drawCircle(canvas.getWidth() - r - 8, 3 * r + 10, r, paint);
+        }
         canvas.drawText(String.valueOf(RedLightSec), canvas.getWidth() - 1.5f *r, 1.5f * r  , paint);
+        if(RedLightSec == 0){
+            paint.setStyle(Paint.Style.FILL_AND_STROKE);
+            paint.setColor(Color.BLACK);
+            canvas.drawCircle(canvas.getWidth() - r - 8, 3 * r + 10, r, paint);
+        }
     }
 
 
